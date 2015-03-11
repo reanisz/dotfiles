@@ -1,3 +1,4 @@
+#!/bin/sh
 ln -s $PWD/vim/.vimrc $HOME/.vimrc
 ln -s $PWD/vim/.vimrc.plugin $HOME/.vimrc.plugin
 touch $HOME/.vimrc.local
