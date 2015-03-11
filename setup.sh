@@ -5,3 +5,4 @@ ln -s $PWD/vim/.vim $HOME/.vim
 touch $HOME/.vimrc.local
 ln -s $PWD/zsh/.zsrhc $HOME/.zshrc
 touch $HOME/.zshrc.local
+ln -s $PWD/tmux/.tmux.conf $HOME/.tmux.conf 
