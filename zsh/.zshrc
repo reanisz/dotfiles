@@ -1,5 +1,4 @@
 export PATH=~/usr/bin/:$PATH
-source ~/.zshrc.local
 
 autoload -U compinit
 compinit
@@ -55,7 +54,7 @@ stty stop undef
 zle -A .backward-kill-word vi-backward-kill-word
 zle -A .backward-delete-char vi-backward-delete-char
 
-source ~/.zsh/incr*.zsh
+#source ~/.zsh/incr*.zsh
 
 zmodload -i zsh/mathfunc
 
@@ -107,3 +106,5 @@ function install_powerline_precmd() {
   precmd_functions+=(powerline_precmd)
 }
 # install_powerline_precmd
+#
+source ~/.zshrc.local
