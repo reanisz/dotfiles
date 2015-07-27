@@ -11,10 +11,6 @@ colorscheme lucius
 
 let $CPP_STDLIB = "/usr/include/c++/"
 set path+=$CPP_STDLIB
-set path+=/opt/knakata/mirrorz/protocol/generated/
-set path+=/opt/knakata/mirrorz/protocol/generated/gmcl/
-set path+=/opt/knakata/mirrorz/lib/
-set path+=/opt/knakata/mirrorz/server/src/
 
 au BufReadPost $CPP_STDLIB/* if empty(&filetype) | set filetype=cpp | endif
 
