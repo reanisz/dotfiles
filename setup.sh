@@ -1,4 +1,5 @@
 #!/bin/sh
+./clean.sh
 ln -s $PWD/vim/.vimrc $HOME/.vimrc
 ln -s $PWD/vim/.vimrc.plugin $HOME/.vimrc.plugin
 ln -s $PWD/vim/.vim $HOME/.vim
