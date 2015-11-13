@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/Users/reanisz/tmp/libCello-1.1.7/include'
 let g:netrw_dirhist_2='/Users/reanisz/Dropbox/source/GriffonScript/GriffonScript/Compiler'
 let g:netrw_dirhist_3='/cygdrive/d/Home/source/test/.git'
 let g:netrw_dirhist_4='/home/vagrant/dotfiles'
 let g:netrw_dirhist_5='/home/vagrant/dotfiles/edict'
 let g:netrw_dirhist_6='/home/vagrant/works/Murasame/source/server/murasame_web/lib/Murasame/Web'
+let g:netrw_dirhist_7='/home/vagrant'
