@@ -1,0 +1,176 @@
+# startup
+[[plugins]]
+repo = 'mhinz/vim-startify'
+
+hook_add = '''
+    let g:startify_custom_header = map(split(system('date'), '\n'), '"   ". v:val') + ['','']
+    let g:startify_bookmarks = [
+                \ '~/.config/nvim/',
+                \ '~/.config/nvim/init.vim',
+                \ '~/.config/nvim/plugins.vim',
+                \ '~/.config/nvim/local_setting.vim',
+                \ ]
+'''
+
+# Powerline
+#[[plugins]]
+#repo = 'powerline/powerline'
+#rtp = 'powerline/bindings/vim'
+
+#[[plugins]]
+#repo = 'vim-airline/vim-airline'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+    let g:lightline = {
+          \ 'colorscheme': 'wombat'
+          \ }
+'''
+
+# Buffer
+[[plugins]]
+repo = 'bufferlist.vim'
+hook_add = '''
+    nnoremap <C-C> :call BufferList()<CR>
+'''
+
+# Operator
+[[plugins]]
+repo = 'operator-user'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+
+# Complete
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#auto_complete_delay = 0
+    let g:deoplete#auto_complete_start_length = 1
+    let g:deoplete#enable_camel_case = 0
+    let g:deoplete#enable_ignore_case = 0
+    let g:deoplete#enable_refresh_always = 0
+    let g:deoplete#enable_smart_case = 1
+    let g:deoplete#file#enable_buffer_path = 1
+    let g:deoplete#max_list = 10000
+'''
+
+# Unite
+[[plugins]]
+repo = 'Shougo/unite.vim'
+hook_add = '''
+    nmap <C-u><C-u> :Unite<CR>
+    nnoremap <silent><buffer> <C-u> <C-\><C-N>:q<CR>
+    inoremap <silent><buffer> <C-u> <C-\><C-N>:q<CR>
+    nmap <silent> <C-u><C-f> :Unite file<CR>
+    let g:unite_enable_start_insert=1
+    nmap <silent> <C-u>B :Unite bookmark<CR>
+    nmap <silent> <C-u>b :Unite buffer<CR>
+    nmap <C-u>rr :Unite ref/
+'''
+
+[[plugins]]
+repo = 'sgur/unite-git_grep'
+hook_add = '''
+    nmap <silent> <C-u><C-g> :Unite vcs_grep<CR>
+'''
+
+[[plugins]]
+repo = 'kmnk/vim-unite-giti'
+
+[[plugins]]
+repo = 'tsukkee/unite-help'
+
+[[plugins]]
+repo = 'tacroe/unite-mark'
+
+[[plugins]]
+repo = 'ujihisa/unite-colorscheme'
+
+[[plugins]]
+repo = 'Shougo/unite-outline'
+hook_add = '''
+    nmap <silent> <C-u>o :Unite outline<CR>
+'''
+
+# Git
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'gregsexton/gitv'
+hook_add = '''
+    nmap <C-G><C-S> :Gstatus<CR>
+    nmap <C-G><C-D> :Gdiff<CR>
+    autocmd FileType gitv call s:my_gitv_settings()
+    function! GitvGetCurrentHash()
+        return matchstr(getline('.'), '\[\zs.\{7\}\ze\]$')
+    endfunction
+    function! s:my_gitv_settings()
+        setlocal iskeyword+=/,-,.
+        nnoremap <silent><buffer> C :<C-u>Git checkout <C-r><C-w><CR>
+        nnoremap <buffer> <Space>rb :<C-u>Git rebase <C-r>=GitvGetCurrentHash()<CR><Space>
+        nnoremap <buffer> <Space>R :<C-u>Git revert <C-r>=GitvGetCurrentHash()<CR><CR>
+        nnoremap <buffer> <Space>h :<C-u>Git cherry-pick <C-r>=GitvGetCurrentHash()<CR><CR>
+        nnoremap <buffer> <Space>rh :<C-u>Git reset --hard <C-r>=GitvGetCurrentHash()<CR>
+    endfunction
+'''
+
+# Yank
+[[plugins]]
+repo = 'LeafCage/yankround.vim'
+hook_add = '''
+    nmap p <Plug>(yankround-p)
+    xmap p <Plug>(yankround-p)
+    nmap P <Plug>(yankround-P)
+    nmap gp <Plug>(yankround-gp)
+    xmap gp <Plug>(yankround-gp)
+    nmap gP <Plug>(yankround-gP)
+    nmap <C-p> <Plug>(yankround-prev)
+    nmap <C-n> <Plug>(yankround-next)
+'''
+
+# .cppと.hを切り替えるやつ
+[[plugins]]
+repo = 'kana/vim-altr'
+hook_add = '''
+    nmap <leader>a <plug>(altr-forward)
+'''
+
+# sudo
+[[plugins]]
+repo = 'sudo.vim'
+
+# Undo tree
+[[plugins]]
+repo = 'sjl/gundo.vim'
+hook_add = '''
+    nmap <silent> U :GundoToggle<CR>
+'''
+
+# Terminal
+[[plugins]]
+repo = 'kassio/neoterm'
+
+# ctags
+[[plugins]]
+repo = 'szw/vim-tags'
+
+# C++
+#[[plugins]]
+#repo = 'zchee/deoplete-clang'
+
+# Perl
+[[plugins]]
+repo = 'yko/mojo.vim'
+
+# Python
+[[plugins]]
+repo = 'hynek/vim-python-pep8-indent'
+
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+
