@@ -39,11 +39,24 @@ hook_add = '''
 [[plugins]]
 repo = 'operator-user'
 
+[[plugins]]
+repo = 'tpope/vim-surround'
+
 
 # Complete
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-
+hook_add = '''
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#auto_complete_delay = 0
+    let g:deoplete#auto_complete_start_length = 1
+    let g:deoplete#enable_camel_case = 0
+    let g:deoplete#enable_ignore_case = 0
+    let g:deoplete#enable_refresh_always = 0
+    let g:deoplete#enable_smart_case = 1
+    let g:deoplete#file#enable_buffer_path = 1
+    let g:deoplete#max_list = 10000
+'''
 
 # Unite
 [[plugins]]
@@ -77,6 +90,11 @@ repo = 'tacroe/unite-mark'
 [[plugins]]
 repo = 'ujihisa/unite-colorscheme'
 
+[[plugins]]
+repo = 'Shougo/unite-outline'
+hook_add = '''
+    nmap <silent> <C-u>o :Unite outline<CR>
+'''
 
 # Git
 [[plugins]]
@@ -122,6 +140,10 @@ hook_add = '''
     nmap <leader>a <plug>(altr-forward)
 '''
 
+# sudo
+[[plugins]]
+repo = 'sudo.vim'
+
 # Undo tree
 [[plugins]]
 repo = 'sjl/gundo.vim'
@@ -133,10 +155,17 @@ hook_add = '''
 [[plugins]]
 repo = 'kassio/neoterm'
 
+# ctags
+[[plugins]]
+repo = 'szw/vim-tags'
+
+# C++
+#[[plugins]]
+#repo = 'zchee/deoplete-clang'
+
 # Perl
 [[plugins]]
 repo = 'yko/mojo.vim'
-
 
 # Python
 [[plugins]]
