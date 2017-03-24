@@ -4,6 +4,7 @@ sudo pacman -S --noconfirm archlinux-keyring
 sudo pacman -Syu --noconfirm
 sudo pacman-db-upgrade
 
-sudo pacman -S --noconfirm zsh
+sudo pacman -S --noconfirm zsh ctags
 
 chsh -s /bin/zsh
+sudo update-ca-trust
