@@ -229,6 +229,14 @@ NeoBundle 'Quramy/tsuquyomi'
 NeoBundle 'leafgarland/typescript-vim'
 let g:neocomplete#force_omni_input_patterns.typescript = '\h\w*\|[^. \t]\.\w*'
 
+" Python系
+NeoBundleLazy 'hynek/vim-python-pep8-indent',{
+    \ "autoload": { "filetypes": [ "python", "python3", "djangohtml"] }}
+NeoBundleLazy 'davidhalter/jedi-vim', {
+    \ "autoload": { "filetypes": [ "python", "python3", "djangohtml"] }}
+"NeoBundleLazy 'bps/vim-textobj-python',{
+"    \ "autoload": { "filetypes": [ "python", "python3", "djangohtml"] }}
+
 call neobundle#end()
 
 filetype plugin indent on 
