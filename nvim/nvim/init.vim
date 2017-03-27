@@ -9,7 +9,8 @@ set t_Co=256
 source ~/.config/nvim/plugins.vim 
 source ~/.config/nvim/local_setting.vim
 
-colorscheme lucius
+"colorscheme lucius
+colorscheme iceberg 
 
 let $CPP_STDLIB = "/usr/include/c++/"
 set path+=$CPP_STDLIB

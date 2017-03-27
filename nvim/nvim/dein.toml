@@ -9,8 +9,16 @@ hook_add = '''
                 \ '~/.config/nvim/init.vim',
                 \ '~/.config/nvim/plugins.vim',
                 \ '~/.config/nvim/local_setting.vim',
+                \ '~/.config/nvim/dein.toml',
                 \ ]
 '''
+
+# Colorscheme
+[[plugins]]
+repo = 'w0ng/vim-hybrid'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
 
 # Powerline
 #[[plugins]]
@@ -60,22 +68,35 @@ hook_add = '''
 
 # Unite
 [[plugins]]
-repo = 'Shougo/unite.vim'
+repo = 'Shougo/denite.nvim'
 hook_add = '''
-    nmap <C-u><C-u> :Unite<CR>
+    nmap <C-u><C-u> :Denite<CR>
     nnoremap <silent><buffer> <C-u> <C-\><C-N>:q<CR>
     inoremap <silent><buffer> <C-u> <C-\><C-N>:q<CR>
-    nmap <silent> <C-u><C-f> :Unite file<CR>
+    nmap <silent> <C-u><C-f> :Denite file_rec<CR>
     let g:unite_enable_start_insert=1
-    nmap <silent> <C-u>B :Unite bookmark<CR>
-    nmap <silent> <C-u>b :Unite buffer<CR>
-    nmap <C-u>rr :Unite ref/
+    nmap <silent> <C-u>B :Denite bookmark<CR>
+    nmap <silent> <C-u>b :Denite buffer<CR>
+    nmap <C-u>rr :Denite ref/
 '''
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+#hook_add = '''
+#    nmap <C-u><C-u> :Unite<CR>
+#    nnoremap <silent><buffer> <C-u> <C-\><C-N>:q<CR>
+#    inoremap <silent><buffer> <C-u> <C-\><C-N>:q<CR>
+#    nmap <silent> <C-u><C-f> :Unite file<CR>
+#    let g:unite_enable_start_insert=1
+#    nmap <silent> <C-u>B :Unite bookmark<CR>
+#    nmap <silent> <C-u>b :Unite buffer<CR>
+#    nmap <C-u>rr :Unite ref/
+#'''
 
 [[plugins]]
 repo = 'sgur/unite-git_grep'
 hook_add = '''
-    nmap <silent> <C-u><C-g> :Unite vcs_grep<CR>
+    nmap <silent> <C-u><C-g> :Denite vcs_grep<CR>
 '''
 
 [[plugins]]
@@ -93,7 +114,7 @@ repo = 'ujihisa/unite-colorscheme'
 [[plugins]]
 repo = 'Shougo/unite-outline'
 hook_add = '''
-    nmap <silent> <C-u>o :Unite outline<CR>
+    nmap <silent> <C-u>o :Denite outline<CR>
 '''
 
 # Git
