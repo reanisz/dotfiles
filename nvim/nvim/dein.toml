@@ -32,7 +32,7 @@ repo = 'cocopon/iceberg.vim'
 repo = 'itchyny/lightline.vim'
 hook_add = '''
     let g:lightline = {
-          \ 'colorscheme': 'wombat'
+          \ 'colorscheme': 'iceberg'
           \ }
 '''
 
