@@ -8,7 +8,16 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 
 NeoBundle 'Shougo/neobundle.vim'
 
-NeoBundle 'operator-user'
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+
+NeoBundle 'operator-user' 
 
 NeoBundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 
@@ -206,6 +215,19 @@ NeoBundle 'tyru/restart.vim'
 NeoBundle 'yko/mojo.vim'
 
 NeoBundle 'thinca/vim-ref'
+
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
+
+au BufRead,BufNewFile *.md set filetype=markdown
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+
+NeoBundle 'PProvost/vim-ps1'
+
+NeoBundle 'Quramy/tsuquyomi'
+NeoBundle 'leafgarland/typescript-vim'
+let g:neocomplete#force_omni_input_patterns.typescript = '\h\w*\|[^. \t]\.\w*'
 
 " Python系
 NeoBundleLazy 'hynek/vim-python-pep8-indent',{

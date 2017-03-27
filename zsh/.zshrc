@@ -1,6 +1,8 @@
 export PATH=~/usr/bin/:$PATH
 export PATH=~/my/lib/bin/:$PATH
 
+export EDITOR=vim
+
 autoload -U compinit
 compinit
 
@@ -109,3 +111,5 @@ function install_powerline_precmd() {
 # install_powerline_precmd
 #
 source ~/.zshrc.local
+
+#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
