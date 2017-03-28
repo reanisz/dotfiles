@@ -25,16 +25,27 @@ repo = 'cocopon/iceberg.vim'
 #repo = 'powerline/powerline'
 #rtp = 'powerline/bindings/vim'
 
-#[[plugins]]
-#repo = 'vim-airline/vim-airline'
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+"    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#tab_nr_type = 1
+
+    let g:airline_theme = 'powerlineish'
+
+'''
 
 [[plugins]]
-repo = 'itchyny/lightline.vim'
-hook_add = '''
-    let g:lightline = {
-          \ 'colorscheme': 'iceberg'
-          \ }
-'''
+repo = 'vim-airline/vim-airline-themes'
+
+#[[plugins]]
+#repo = 'itchyny/lightline.vim'
+#hook_add = '''
+#    let g:lightline = {
+#          \ 'colorscheme': 'iceberg'
+#          \ }
+#'''
 
 # Buffer
 [[plugins]]
@@ -43,13 +54,24 @@ hook_add = '''
     nnoremap <C-C> :call BufferList()<CR>
 '''
 
-# Operator
+# Textobj
 [[plugins]]
-repo = 'operator-user'
+repo = 'kana/vim-textobj-user'
+
+[[plugins]]
+repo = 'mattn/vim-textobj-url'
+
+## 同単語の並びを選択するやつ
+## iv, av
+[[plugins]]
+repo = 'rhysd/vim-textobj-word-column'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
 
+# Operator
+[[plugins]]
+repo = 'operator-user'
 
 # Complete
 [[plugins]]
