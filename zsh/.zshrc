@@ -2,11 +2,11 @@ export PATH=~/usr/bin/:$PATH
 export PATH=~/my/lib/bin/:$PATH
 
 export EDITOR=vim
+export LANG=ja_JP.UTF-8
 
 autoload -U compinit
 compinit
 
-#PROMPT="%n@%m:%~%# "
 PROMPT="%n:%~%# "
 RPROMPT="[%~]"
 RPROMPT=""
@@ -32,8 +32,6 @@ compinit
 export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
-
-
 alias ls="ls --color"
 alias gls="gls --color"
 
@@ -45,7 +43,7 @@ alias j="autojump"
 #bindkey "^P" up-line-or-history
 #bindkey "^N" down-line-or-history
 
-# $B%3%^%s%IMzNr8!:w(B
+# コマンド履歴検索
  autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -94,22 +92,6 @@ export PATH=~/.plenv/shims:$PATH
 
 alias tmux='tmux -2'
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+alias wttr='curl "wttr.in/渋谷区?0"'
 
-function powerline_precmd() {
-  export PS1="$(python2 ~/.zsh/powerline-shell/powerline-shell.py $? --shell zsh 2> /dev/null)"
-}
-function install_powerline_precmd() {
-  for s in "${precmd_functions[@]}" ; do
-      if [ "$s" = "powerline_precmd" ] ; then
-          return
-      fi
-  done
-  precmd_functions+=(powerline_precmd)
-}
-# install_powerline_precmd
-#
 source ~/.zshrc.local
-
-#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
