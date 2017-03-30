@@ -11,6 +11,7 @@ source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/local_setting.vim
 
 runtime! settings/*.vim
+runtime term-color/ubuntu.vim
 
 "colorscheme lucius
 colorscheme iceberg 
