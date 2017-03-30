@@ -8,8 +8,16 @@ autoload -U compinit
 compinit
 
 PROMPT="%n:%~%# "
-RPROMPT="[%~]"
-RPROMPT=""
+
+function get_git_branch() {
+    CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD 2> /dev/null`
+    if [ "$CURRENT_BRANCH" != "" ] ; then
+        echo -n "%F{3}[$CURRENT_BRANCH]%f"
+    fi
+}
+setopt prompt_subst
+
+RPROMPT='$(get_git_branch)'
 
 HISTFILE=~/zsh_history
 HISTSIZE=10000
