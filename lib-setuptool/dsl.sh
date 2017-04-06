@@ -10,15 +10,15 @@ exec_cmd(){
 }
 
 warning(){
-    echo -e "\e[33mWarning: $@\e[m"
+    echo -e $"\e[33mWarning: $@\e[m"
 }
 
 error(){
-    echo -e "\e[31mError: $@\e[m"
+    echo -e $"\e[31mError: $@\e[m"
 }
 
 note(){
-    echo -e "\e[34mNote: $@\e[m"
+    echo -e $"\e[34mNote: $@\e[m"
 }
 
 init_target(){
