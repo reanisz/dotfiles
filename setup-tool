@@ -4,7 +4,7 @@ declare -a setup_targets=()
 
 dotfiles_root=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 force_exec=0
-debug_mode=1
+debug_mode=0
 print_cmd=0
 dry_run=0
 
