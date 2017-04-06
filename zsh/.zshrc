@@ -1,5 +1,6 @@
 export PATH=~/usr/bin/:$PATH
 export PATH=~/my/lib/bin/:$PATH
+export PATH=~/.local/bin/:$PATH
 
 export EDITOR=vim
 export LANG=ja_JP.UTF-8
