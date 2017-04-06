@@ -24,7 +24,7 @@ module EDict
     # GENE95 辞書
     # http://www.namazu.org/~tsuchiya/sdic/data/gene.html
     #
-    DICT = "~/my/lib/dat/gene.txt"
+    DICT = "~/.local/dat/gene.txt"
 
     def search(word)
         catch(:found) do
