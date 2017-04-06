@@ -10,7 +10,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
 if !has('nvim')
-    set runtimepath+=~/.config/nvim/
+    set runtimepath+=~/.config/.vim/
 endif
 
 runtime plugins.vim 
