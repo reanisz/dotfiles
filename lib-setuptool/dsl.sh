@@ -29,7 +29,7 @@ init_target(){
 make_symlink(){
     from=$dotfiles_root/$1
     to=$home_root/$2
-    if [ ! -f $to ] ; then
+    if [ ! -f $to -a ! -L $to ] ; then
         exec_cmd ln -s $from $to
     else
         if [ "$force_exec" = 1 ] ; then
