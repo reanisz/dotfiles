@@ -20,6 +20,6 @@ process_edict(){
         exec_cmd rm gene95.tar.gz
 
         exec_cmd cd $current_dir
-        rmdir /tmp/edict
+        exec_cmd rmdir /tmp/edict
     fi
 }
