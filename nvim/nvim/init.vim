@@ -5,13 +5,22 @@ set viminfo='20,<50,s10,h,! " YankRing用に!を追加
 set shellslash              " Windowsでディレクトリパスの区切り文字に / を使えるようにする
 set lazyredraw              " マクロなどを実行中は描画を中断
 set t_Co=256
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
-source ~/.config/nvim/plugins.vim 
-source ~/.config/nvim/local_setting.vim
+if !has('nvim')
+    set runtimepath+=~/.config/nvim/
+endif
+
+runtime plugins.vim 
+runtime local_setting.vim
 
 runtime! settings/*.vim
-runtime term-color/ubuntu.vim
+if has('nvim')
+    runtime! settings/*.nvim
+    runtime term-color/ubuntu.nvim
+endif
 
 "colorscheme lucius
 colorscheme iceberg 
@@ -123,9 +132,6 @@ set tags=.tags;
 nmap <C-]> g<C-]>
 
 vnoremap <C-W>t gt
-
-" Terminalモードからescで抜ける
-tnoremap <silent> <ESC> <C-\><C-n>
 
 set complete+=k    " 補完に辞書ファイル追加
 

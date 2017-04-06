@@ -1,0 +1,2 @@
+" Terminalモードからescで抜ける
+tnoremap <silent> <ESC> <C-\><C-n>
