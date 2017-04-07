@@ -10,7 +10,7 @@ pop_indent(){
 }
 
 echo_indent(){
-    local i=$echo_indent
+    local i="$echo_indent"
     while [[ $i != 0 ]]
     do
         echo -n "  "
@@ -23,7 +23,7 @@ exec_cmd(){
         echo_cmd "$@"
     fi
     if [ $dry_run != 1 ] ; then
-        eval $@
+        eval "$@"
     fi
 }
 
@@ -58,7 +58,7 @@ debug(){
 }
 
 init_target(){
-    target_name=$1
+    target_name="$1"
     setup_targets+=( $target_name )
 }
 
@@ -71,8 +71,8 @@ warn_or_error(){
 }
 
 make_symlink(){
-    local from=$dotfiles_root/$1
-    local to=$home_root/$2
+    local from="$dotfiles_root/$1"
+    local to="$home_root/$2"
 
     local allow_exec=1
     local overwrite=0
@@ -85,7 +85,7 @@ make_symlink(){
         else
             if [ "$force_exec" = 1 ] ; then
                 overwrite=1
-                exec_cmd rm $to
+                exec_cmd rm "$to"
             else
                 error "cannot make symlink at $to. (already exists some symlink)"
                 allow_exec=0
@@ -94,7 +94,7 @@ make_symlink(){
     elif [[ -f "$to" ]] ; then
         if [ "$force_exec" = 1 ] ; then
             overwrite=1
-            exec_cmd rm $to
+            exec_cmd rm "$to"
         else
             error "cannot make symlink at $to. (already exists some file)"
             allow_exec=0
@@ -104,39 +104,39 @@ make_symlink(){
         if [[ "$overwrite" = 1 ]] ; then
             warning "$to is over written."
         fi
-        exec_cmd ln -s $from $to
+        exec_cmd ln -s "$from" "$to"
     fi
 }
 remove_symlink(){
-    local from=$dotfiles_root/$1
-    local to=$home_root/$2
+    local from="$dotfiles_root/$1"
+    local to="$home_root/$2"
     local invalid=0
 
-    if [[ -L $to ]] ; then
+    if [[ -L "$to" ]] ; then
         local link=`readlink $to`
         if [[ "$link" != "$from" ]] ; then
             invalid=1
         fi
-    elif [[ -f $to ]] ; then
+    elif [[ -f "$to" ]] ; then
         invalid=1
     fi
     if [[ "$invalid" = 1 ]] ; then
         warn_or_error "$to is invalid."
     fi
     if [[ "$invalid" = 0 || "$force_exec" = 1 ]] ; then
-        exec_cmd rm $to
+        exec_cmd rm "$to"
     fi
 }
 
 make_copy(){
-    from=$dotfiles_root/$1
-    to=$home_root/$2
-    if [ ! -f $to ] ; then
-        exec_cmd cp $from $to
+    local from="$dotfiles_root/$1"
+    local to="$home_root/$2"
+    if [ ! -f "$to" ] ; then
+        exec_cmd cp "$from" "$to"
     else
         if [ "$force_exec" = 1 ] ; then
             warning "$to is already exists."
-            exec_cmd cp $from $to
+            exec_cmd cp "$from" "$to"
         else
             error "$to is already exists."
         fi
@@ -144,14 +144,14 @@ make_copy(){
 }
 
 remove_copy(){
-    from=$dotfiles_root/$1
-    to=$home_root/$2
-    if diff -q $from $to >/dev/null ; then
-        exec_cmd rm $to
+    local from="$dotfiles_root/$1"
+    local to="$home_root/$2"
+    if diff -q "$from" "$to" >/dev/null ; then
+        exec_cmd rm "$to"
     else
         if [ "$force_exec" = 1 ] ; then
             warning "$to is different from $from."
-            exec_cmd rm $to
+            exec_cmd rm "$to"
         else
             error "$to is different from $from."
         fi
@@ -159,76 +159,76 @@ remove_copy(){
 }
 
 make_file(){
-    to=$home_root/$1
+    local to="$home_root/$1"
     if [ ! -f $to ] ; then
-        exec_cmd touch $to
+        exec_cmd touch "$to"
     else
         note "file $to is already exists."
     fi
 }
 
 remove_file(){
-    to=$home_root/$1
+    local to="$home_root/$1"
     # Nothing to do
 }
 
 make_directory(){
-    to=$home_root/$1
+    local to="$home_root/$1"
     if [ ! -d $to ] ; then
-        exec_cmd mkdir -p $to
+        exec_cmd mkdir -p "$to"
     else
         note "directory $to is already exists."
     fi
 }
 
 remove_directory(){
-    to=$home_root/$1
+    to="$home_root/$1"
     # Nothing to do
 }
 
 symlink(){
-    case $command in
+    case "$command" in
         setup)
-            eval make_symlink $1 $2
+            eval make_symlink "$1" "$2"
             ;;
         clean)
-            eval remove_symlink $1 $2
+            eval remove_symlink "$1" "$2"
             ;;
         *)
             ;;
     esac
 }
 copy(){
-    case $command in
+    case "$command" in
         setup)
-            eval make_copy $1 $2
+            eval make_copy "$1" "$2"
             ;;
         clean)
-            eval remove_copy $1 $2
+            eval remove_copy "$1" "$2"
             ;;
         *)
             ;;
     esac
 }
 file(){
-    case $command in
+    case "$command" in
         setup)
-            eval make_file $1 $2
+            eval make_file "$1" "$2"
             ;;
         clean)
-            eval remove_file $1 $2
+            eval remove_file "$1" "$2"
             ;;
         *)
             ;;
     esac
 }
 directory(){
-    case $command in
+    case "$command" in
         setup)
-            eval make_directory $1 $2
+            eval make_directory "$1" "$2"
             ;;
         clean)
-            eval remove_directory $1 $2
+            eval remove_directory "$1" "$2"
             ;;
         *)
             ;;
