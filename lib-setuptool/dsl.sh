@@ -62,33 +62,69 @@ init_target(){
     setup_targets+=( $target_name )
 }
 
-make_symlink(){
-    from=$dotfiles_root/$1
-    to=$home_root/$2
-    if [ ! -f $to -a ! -L $to ] ; then
-        exec_cmd ln -s $from $to
+warn_or_error(){
+    if [[ "$force_exec" = 1 ]] ; then
+        warning "$@"
     else
-        if [ "$force_exec" = 1 ] ; then
-            warning "$to is already exists."
-            exec_cmd rm $to
-            exec_cmd ln -s $from $to
+        error "$@"
+    fi
+}
+
+make_symlink(){
+    local from=$dotfiles_root/$1
+    local to=$home_root/$2
+
+    local allow_exec=1
+    local overwrite=0
+
+    if [[ -L "$to" ]] ; then
+        local link=`readlink $to`
+        if [[ "$link" = "$from" ]] ; then
+            note "symlink $to is already exists."
+            allow_exec=0
         else
-            error "$to is already exists."
+            if [ "$force_exec" = 1 ] ; then
+                overwrite=1
+                exec_cmd rm $to
+            else
+                error "cannot make symlink at $to. (already exists some symlink)"
+                allow_exec=0
+            fi
         fi
+    elif [[ -f "$to" ]] ; then
+        if [ "$force_exec" = 1 ] ; then
+            overwrite=1
+            exec_cmd rm $to
+        else
+            error "cannot make symlink at $to. (already exists some file)"
+            allow_exec=0
+        fi
+    fi
+    if [[ "$allow_exec" = 1 ]] ; then
+        if [[ "$overwrite" = 1 ]] ; then
+            warning "$to is over written."
+        fi
+        exec_cmd ln -s $from $to
     fi
 }
 remove_symlink(){
-    from=$dotfiles_root/$1
-    to=$home_root/$2
-    if [ -L $to ] ; then
-        exec_cmd rm $to
-    else
-        if [ "$force_exec" = 1 ] ; then
-            warning "$to is not symbolic-link."
-            exec_cmd rm $to
-        else
-            error "$to is not symbolic-link."
+    local from=$dotfiles_root/$1
+    local to=$home_root/$2
+    local invalid=0
+
+    if [[ -L $to ]] ; then
+        local link=`readlink $to`
+        if [[ "$link" != "$from" ]] ; then
+            invalid=1
         fi
+    elif [[ -f $to ]] ; then
+        invalid=1
+    fi
+    if [[ "$invalid" = 1 ]] ; then
+        warn_or_error "$to is invalid."
+    fi
+    if [[ "$invalid" = 0 || "$force_exec" = 1 ]] ; then
+        exec_cmd rm $to
     fi
 }
 
