@@ -101,5 +101,8 @@ done
 
 #Execute command
 for target_name in ${targets[@]}; do
+    echo_msg "Process $target_name"
+    push_indent
     eval process_${target_name}
+    pop_indent
 done

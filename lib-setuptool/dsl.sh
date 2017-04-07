@@ -1,24 +1,60 @@
 #!/bin/sh
 
+echo_indent=0
+
+push_indent(){
+    echo_indent=$(( echo_indent + 1 ))
+}
+pop_indent(){
+    echo_indent=$(( echo_indent - 1 ))
+}
+
+echo_indent(){
+    local i=$echo_indent
+    while [[ $i != 0 ]]
+    do
+        echo -n "  "
+        i=$(( i - 1 ))
+    done
+}
+
 exec_cmd(){
     if [ $print_cmd = 1 ] ; then
-        echo -e "\e[36m$@\e[m"
+        echo_cmd "$@"
     fi
     if [ $dry_run != 1 ] ; then
         eval $@
     fi
 }
 
+echo_msg(){
+    echo_indent
+    echo "$@"
+}
+
+echo_cmd(){
+    echo_indent
+    echo -e "\e[36m$@\e[m"
+}
+
 warning(){
+    echo_indent
     printf "\033[33mWarning: $@\033[m\n"
 }
 
 error(){
+    echo_indent
     printf "\033[31mError: $@\033[m\n"
 }
 
 note(){
+    echo_indent
     printf "\033[34mNote: $@\033[m\n"
+}
+
+debug(){
+    echo_indent
+    printf "\033[32mDebug: $@\033[m\n"
 }
 
 init_target(){
