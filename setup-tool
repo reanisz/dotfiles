@@ -94,7 +94,7 @@ targets=($(echo ${targets[@]} | sed "s/ /\\n/g" | sort | uniq ))
 #Target validation
 for target_name in ${targets[@]}; do
     if [[ !( " ${setup_targets[@]} " =~ \ $target_name\  ) ]] ; then 
-        echo "error: unexpected target : $target_name"
+        error "unexpected target : $target_name"
         exit 1
     fi
 done
