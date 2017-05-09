@@ -89,7 +89,8 @@ do
     shift
 done
 
-targets=($(echo ${targets[@]} | sed "s/ /\\n/g" | sort | uniq ))
+LF=$'\\\x0A'
+targets=( $(echo ${targets[@]} | sed 's/ /'"$LF"'/g' | sort | uniq ) )
 
 #Target validation
 for target_name in ${targets[@]}; do
