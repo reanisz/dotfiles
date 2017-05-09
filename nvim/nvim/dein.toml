@@ -49,7 +49,7 @@ repo = 'vim-airline/vim-airline-themes'
 
 # Buffer
 [[plugins]]
-repo = 'bufferlist.vim'
+repo = 'vim-scripts/bufferlist.vim'
 hook_add = '''
     nnoremap <C-C> :call BufferList()<CR>
 '''
@@ -71,7 +71,7 @@ repo = 'tpope/vim-surround'
 
 # Operator
 [[plugins]]
-repo = 'operator-user'
+repo = 'vim-scripts/operator-user'
 
 # Unite
 [[plugins]]
@@ -170,7 +170,7 @@ hook_add = '''
 
 # sudo
 [[plugins]]
-repo = 'sudo.vim'
+repo = 'vim-scripts/sudo.vim'
 
 # Undo tree
 [[plugins]]
