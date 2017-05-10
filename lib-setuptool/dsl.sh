@@ -34,7 +34,9 @@ echo_msg(){
 
 echo_cmd(){
     echo_indent
-    echo -e "\e[36m$@\e[m"
+    printf "\033[36m"
+    echo -n $@
+    printf "\033[m\n"
 }
 
 warning(){
@@ -186,6 +188,36 @@ remove_directory(){
     # Nothing to do
 }
 
+make_github(){
+    local to="$home_root/$2"
+    local url="https://github.com/$1"
+    if [ ! -d $to ] ; then
+        exec_cmd git clone $url "$to"
+    else
+        now_repo=`git -C "$to" remote get-url origin`
+        if [[ "$now_repo" == "$url" ]]; then
+            exec_cmd git -C "$to" pull
+        else
+            error "directory $to is already exists."
+        fi
+    fi
+}
+
+remove_github(){
+    local to="$home_root/$2"
+    local url="https://github.com/$1"
+    if [ ! -d $to ] ; then
+        note "Nothing to do."
+    else
+        now_repo=`git -C "$to" remote get-url origin`
+        if [[ "$now_repo" == "$url" ]]; then
+            exec_cmd rm -rf "$to"
+        else
+            error "directory $to is not $2."
+        fi
+    fi
+}
+
 symlink(){
     case "$command" in
         setup)
@@ -229,6 +261,19 @@ directory(){
             ;;
         clean)
             eval remove_directory "$1" "$2"
+            ;;
+        *)
+            ;;
+    esac
+}
+
+github(){
+    case "$command" in
+        setup)
+            eval make_github "$1" "$2"
+            ;;
+        clean)
+            eval remove_github "$1" "$2"
             ;;
         *)
             ;;
