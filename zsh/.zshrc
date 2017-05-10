@@ -1,3 +1,13 @@
+if [[ "$(uname)" == 'Darwin' ]]; then
+  OS='Mac'
+elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
+  OS='Linux'
+elif [[ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]]; then                                                                                           
+  OS='Cygwin'
+else
+  echo "Error: Your platform ($(uname -a)) is not supported."
+fi
+
 export PATH=~/usr/bin/:$PATH
 export PATH=~/my/lib/bin/:$PATH
 export PATH=~/.local/bin/:$PATH
@@ -32,17 +42,23 @@ setopt list_packed
 
 bindkey -e
 
-#autoload predict-on
-#predict-on
-
 autoload -U compinit
 compinit
 
 export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
-alias ls="ls --color"
-alias gls="gls --color"
+if [[ "$OS" != "Mac" ]]; then
+    alias ls="ls --color"
+    alias gls="gls --color"
+else
+    alias ls="ls -G"
+    alias gls="gls -G"
+fi
+
+if hash nvim 2> /dev/null; then
+    alias vim="nvim"
+fi
 
 zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
@@ -96,8 +112,10 @@ function ejje() {
 }
 
 export PATH="$HOME/.plenv/bin:$PATH"
-eval "$(plenv init -)"
-export PATH=~/.plenv/shims:$PATH
+if hash plenv 2> /dev/null; then
+    eval "$(plenv init -)"
+    export PATH=~/.plenv/shims:$PATH
+fi
 
 alias tmux='tmux -2'
 
