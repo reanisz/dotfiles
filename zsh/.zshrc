@@ -120,4 +120,5 @@ alias tmux='tmux -2'
 
 alias wttr='curl "wttr.in/渋谷区?0"'
 
+source ~/.zsh/zsh_settings/*
 source ~/.zshrc.local
