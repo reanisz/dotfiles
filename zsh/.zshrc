@@ -111,10 +111,9 @@ function ejje() {
     w3m +50 http://ejje.weblio.jp/content/$str
 }
 
-export PATH="$HOME/.plenv/bin:$PATH"
-if hash plenv 2> /dev/null; then
-    eval "$(plenv init -)"
-    export PATH=~/.plenv/shims:$PATH
+export PATH="$HOME/.anyenv/bin:$PATH"
+if hash anyenv 2> /dev/null; then
+    eval "$(anyenv init -)"
 fi
 
 alias tmux='tmux -2'
