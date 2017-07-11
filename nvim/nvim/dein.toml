@@ -205,3 +205,14 @@ repo = 'davidhalter/jedi-vim'
 # Typescript
 [[plugins]]
 repo = 'mhartington/nvim-typescript'
+
+# Rust
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+
+[[plugins]]
+repo = 'racer-rust/vim-racer'
+hook_add = '''
+    " 保存時に自動でformatする
+    let g:rustfmt_autosave = 1
+'''
