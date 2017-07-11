@@ -45,21 +45,6 @@ bindkey -e
 autoload -U compinit
 compinit
 
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-
-if [[ "$OS" != "Mac" ]]; then
-    alias ls="ls --color"
-    alias gls="gls --color"
-else
-    alias ls="ls -G"
-    alias gls="gls -G"
-fi
-
-if hash nvim 2> /dev/null; then
-    alias vim="nvim"
-fi
-
 zstyle ':completion:*' list-colors 'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
 
 alias j="autojump"
@@ -84,33 +69,6 @@ zle -A .backward-delete-char vi-backward-delete-char
 
 zmodload -i zsh/mathfunc
 
-function ggr() {
-    local str opt
-    if [ $ != 0 ]
-    then
-        for i in $*
-        do
-            str="$str+$i"
-        done
-        str=`echo $str | sed 's/^\+//'`
-        opt='search?num=50&hl=ja&lr=lang_ja'
-        opt="${opt}&q=${str}"
-    fi
-    w3m http://www.google.co.jp/$opt
-}
-function ejje() {
-    local str opt
-    if [ $ != 0 ]
-    then
-        for i in $*
-        do
-            str="$str+$i"
-        done
-        str=`echo $str | sed 's/^\+//'`
-    fi
-    w3m +50 http://ejje.weblio.jp/content/$str
-}
-
 export PATH="$HOME/.anyenv/bin:$PATH"
 if hash anyenv 2> /dev/null; then
     eval "$(anyenv init -)"
@@ -118,7 +76,22 @@ fi
 
 alias tmux='tmux -2'
 
-alias wttr='curl "wttr.in/渋谷区?0"'
+#======== aliases
+export LSCOLORS=exfxcxdxbxegedabagacad
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+
+if [[ "$OS" != "Mac" ]]; then
+    alias ls="ls --color"
+    alias gls="gls --color"
+else
+    alias ls="ls -G"
+    alias gls="gls -G"
+fi
+
+if hash nvim 2> /dev/null; then
+    alias vim="nvim"
+fi
+
 
 source ~/.zsh/zsh_settings/*
 source ~/.zshrc.local
