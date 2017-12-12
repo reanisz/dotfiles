@@ -92,6 +92,9 @@ if hash nvim 2> /dev/null; then
     alias vim="nvim"
 fi
 
+function reload_functions(){
+    source ~/.zsh/zsh_settings/*
+}
 
-source ~/.zsh/zsh_settings/*
+reload_functions
 source ~/.zshrc.local
