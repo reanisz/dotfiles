@@ -7,4 +7,5 @@ cpanm Data::Printer
 cpanm File::Slurp
 cpanm JSON
 cpanm Text::Diff
+LANG=C cpanm LWP::Protocol::https --force
 

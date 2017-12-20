@@ -52,7 +52,7 @@ package Atcoder{
         my $url = $self->url() . "/login";
         $url =~ s/http/https/;
         $url =~ s|(?<!:)//|/|g;
-        print $url;
+        print "url=", $url, "\n";
         my $req = POST $url, [ name => $user, password => $passwd];
         my $res = $self->browser()->request($req);
         if($res->is_success){
@@ -67,7 +67,7 @@ package Atcoder{
         my $url = $self->url() . "/tasks/". shift;
         $url =~ s|(?<!:)//|/|g;
         my $data = $self->get($url);
-        my @t = $data=~ m|<h3>入力例(\d+)</h3>\s*<pre.*?>\s*(.*?)\s*</pre>.*<h3>出力例\1</h3>\s*<pre.*?>\s*(.*?)\s*</pre>|sg;
+        my @t = $data=~ m|<h3>Sample Input (\d+)</h3>\s*<pre.*?>\s*(.*?)\s*</pre>.*<h3>Sample Output \1</h3>\s*<pre.*?>\s*(.*?)\s*</pre>|sg;
         my $res = [];
         for(my $i=0;$i<scalar(@t)/3;$i++){
             my $in = $t[$i*3+1];
