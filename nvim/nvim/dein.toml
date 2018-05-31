@@ -161,6 +161,10 @@ hook_add = '''
     nmap <C-n> <Plug>(yankround-next)
 '''
 
+# C++
+[[plugins]]
+repo = 'lyuts/vim-rtags'
+
 # .cppと.hを切り替えるやつ
 [[plugins]]
 repo = 'kana/vim-altr'
@@ -187,10 +191,6 @@ repo = 'kassio/neoterm'
 [[plugins]]
 repo = 'szw/vim-tags'
 
-# C++
-#[[plugins]]
-#repo = 'zchee/deoplete-clang'
-
 # Perl
 [[plugins]]
 repo = 'yko/mojo.vim'
@@ -216,3 +216,11 @@ hook_add = '''
     " 保存時に自動でformatする
     let g:rustfmt_autosave = 1
 '''
+
+# Go
+[[plugins]]
+repo = 'fatih/vim-go'
+
+[[plugins]]
+repo = 'zchee/deoplete-go'
+build = 'make'
