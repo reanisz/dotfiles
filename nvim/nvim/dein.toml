@@ -54,6 +54,10 @@ hook_add = '''
     nnoremap <C-C> :call BufferList()<CR>
 '''
 
+# Tab
+[[plugins]]
+repo = 'kana/vim-tabpagecd'
+
 # Textobj
 [[plugins]]
 repo = 'kana/vim-textobj-user'
