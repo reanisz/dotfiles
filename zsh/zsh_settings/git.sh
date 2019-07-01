@@ -2,7 +2,7 @@ function git-prevbranch(){
     git rev-parse --abbrev-ref '@{-1}'
 }
 function git-nowbranch(){
-    git rev-parse --abbrev-ref '@{-1}'
+    git rev-parse --abbrev-ref 'HEAD'
 }
 
 function git-mergeprev(){
