@@ -1,0 +1,17 @@
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+                \ 'name': 'gopls',
+                \ 'cmd': {server_info->['gopls']},
+                \ 'whitelist': ['go'],
+                \ })
+    autocmd BufWritePre *.go LspDocumentFormatSync
+endif
+
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+                \ 'name': 'clangd',
+                \ 'cmd': {server_info->['clangd']},
+                \ 'whitelist': ['c', 'cpp', 'h', 'hpp'],
+                \ })
+endif
+

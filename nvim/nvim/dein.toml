@@ -221,10 +221,10 @@ hook_add = '''
     let g:rustfmt_autosave = 1
 '''
 
-# Go
-[[plugins]]
-repo = 'fatih/vim-go'
+# Golang
+# [[plugins]]
+# repo = 'fatih/vim-go'
 
-[[plugins]]
-repo = 'zchee/deoplete-go'
-build = 'make'
+# [[plugins]]
+# repo = 'zchee/deoplete-go'
+# build = 'make'
