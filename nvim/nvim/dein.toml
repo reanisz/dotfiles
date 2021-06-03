@@ -54,6 +54,17 @@ hook_add = '''
     nnoremap <C-C> :call BufferList()<CR>
 '''
 
+[[plugins]]
+repo = 'el-iot/buffer-tree'
+hook_add = '''
+    let g:buffer_tree_compress = 1
+'''
+[[plugins]]
+repo = 'el-iot/buffer-tree-explorer'
+hook_add = '''
+    let g:buffer_tree_explorer_compress = 1
+'''
+
 # Tab
 [[plugins]]
 repo = 'kana/vim-tabpagecd'
@@ -228,3 +239,11 @@ hook_add = '''
 # [[plugins]]
 # repo = 'zchee/deoplete-go'
 # build = 'make'
+
+# Debug
+[[plugins]]
+repo = 'puremourning/vimspector'
+bulid = './install_gadget.py --enable-c --enable-go'
+hook_source = '''
+let g:vimspector_enable_mappings = 'HUMAN'
+'''

@@ -140,3 +140,7 @@ syntax on " シンタックスカラーリングオン
 
 filetype indent on " ファイルタイプによるインデントを行う
 filetype plugin on " ファイルタイプごとのプラグインを使う
+
+packadd termdebug
+
+
