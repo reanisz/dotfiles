@@ -1,8 +1,8 @@
 #!/bin/sh
 
-init_target vim
+init_target atcoder
 
-process_vim(){
+process_atcoder(){
     directory .config
     symlink atcoder-cli-nodejs/ .config/atcoder-cli-nodejs
 }
