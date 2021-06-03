@@ -1,0 +1,6 @@
+{
+  "task": {
+    "program": ["main.cpp", "compile_flags.txt"],
+    "submit": "main.cpp"
+  }
+}
