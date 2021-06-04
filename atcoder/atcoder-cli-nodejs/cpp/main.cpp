@@ -1,3 +1,4 @@
+#pragma region includes
 #include <atcoder/all>
 
 #include <iostream>
@@ -13,13 +14,16 @@
 #include <bitset>
 
 #include <cmath>
+#include <random>
 
 // boost
 #include <boost/multiprecision/cpp_int.hpp>
 
+#pragma endregion
+#pragma region types
+// ====== Types =======
 using namespace std;
 
-// ====== Types =======
 using uint = unsigned int;
 using ll = long long;
 using ull = unsigned long long;
@@ -56,12 +60,12 @@ vector<vector<T>> make_grid(std::size_t w, std::size_t h, T default_value=T{})
 {
     return vector<vector<T>>(w, vector<T>(h, default_value));
 }
-
-// ====== macro =======
+#pragma endregion
+#pragma region utils
+// ====== utils ======
 #define REP(variable, count) for(int variable = 0; variable < count; variable++)
 #define REPR(variable, min_value, max_value) for(int variable = min_value; variable < max_value; variable++)
 
-// ====== Utlis ======
 template<class T, class... TArgs>
 T& update_max(T& variable, TArgs... values)
 {
@@ -71,8 +75,29 @@ T& update_max(T& variable, TArgs... values)
 template<class T, class... TArgs>
 T& update_min(T& variable, TArgs... values)
 {
-    variable = std::max<T>(variable, values...);
+    variable = std::min<T>(variable, values...);
     return variable;
+}
+#pragma endregion
+#pragma region algorithm
+// ====== algorithm ======
+// [min, max)中をfuncで二部探索
+template<class TKey>
+auto binsearch(TKey ok, TKey ng, std::function<bool(TKey)> func)
+{
+    while(1 < abs(ok - ng))
+    {
+        auto mid = (ok + ng) / 2;
+        if(func(mid))
+        {
+            ok = mid;
+        }
+        else
+        {
+            ng = mid;
+        }
+    }
+    return ok;
 }
 
 namespace range 
@@ -93,28 +118,30 @@ namespace range
     {
         std::reverse(vec.begin(), vec.end());
     }
-}
 
-// [min, max)中をfuncで二部探索
-template<class TKey>
-auto binsearch(TKey ok, TKey ng, std::function<bool(TKey)> func)
-{
-    while(1 < abs(ok - ng))
+    template<class TVec, class TElem>
+    void lower_bound(TVec& vec, const TElem& value)
     {
-        auto mid = (ok + ng) / 2;
-        if(func(mid))
-        {
-            ok = mid;
-        }
-        else
-        {
-            ng = mid;
-        }
+        return std::lower_bound(vec.begin(), vec.end(), value);
     }
-    return ok;
+ 
+    template<class T, class TFunc>
+    typename std::vector<T>::iterator lower_bound_if(std::vector<T>& vec, TFunc&& func)
+    {
+        int size = vec.size();
+        auto res = binsearch<int>(size, -1, [&](int idx) -> bool {
+            if(idx == size)
+                return true;
+ 
+            auto& v = vec[idx];
+            return std::forward<TFunc>(func)(v);
+        });
+ 
+        return vec.begin() + res;
+    }
 }
-
-
+#pragma endregion
+#pragma region io
 // ====== I/O =======
 template<class T>
 class input_vector 
@@ -132,7 +159,7 @@ public:
         auto size = _out.size();
         size += _cnt;
         _out.reserve(size);
-        for(std::size_t i=0;i<_cnt;i++)
+        for(int i=0;i<_cnt;i++)
         {
             T tmp;
             is >> tmp;
@@ -268,17 +295,17 @@ public:
         }
         else
         {
-            int width = 0;
-            int height = _in.size();
+            std::size_t width = 0;
+            std::size_t height = _in.size();
             for(auto& row : _in)
             {
                 update_max(width, row.size());
             }
 
-            for(int y=0;y<height;y++)
+            for(std::size_t y=0;y<width;y++)
             {
                 std::size_t i = 0;
-                for(int x=0;x<width;x++)
+                for(int x=0;x<height;x++)
                 {
                     if(i != 0)
                         os << _delimiter;
@@ -313,7 +340,8 @@ basic_ostream<CharT, Traits>& operator<<(basic_ostream<CharT, Traits>& os, const
     os << "(" << p.first << ", " << p.second << ")";
     return os;
 }
-
+#pragma endregion
+#pragma region graph
 // ====== graph =======
 namespace graphs
 {
@@ -401,7 +429,8 @@ namespace graphs
         vector<vector<edge>> _edges;
     };
 }
-
+#pragma endregion
+#pragma region prime
 // ====== prime =======
 namespace prime
 {
@@ -475,7 +504,8 @@ namespace prime
         vector<Int> _primes;
     };
 }
-
+#pragma endregion
+#pragma region accumulate
 // ====== accumulate ======
 // 1次元累積和
 template<class T>
@@ -572,12 +602,65 @@ private:
     int _width;
     int _height;
 };
+#pragma endregion
+#pragma region debug
+// ==== DEBUG ====
+#ifdef DEBUG
+  #define FMT_HEADER_ONLY
+  #include <fmt/core.h>
 
+  #define TRACE(...) cerr << fmt::format(__VA_ARGS__)
+
+  namespace fmt {
+      template<class T, class CharT, class... TArgs>
+      struct formatter<std::vector<T, TArgs...>, CharT>
+        : formatter<string, CharT>
+      {
+          template<class FormatContext>
+          auto format(const std::vector<T, TArgs...>& t, FormatContext& fc) {
+              std::stringstream ss;
+              ss << output_vector{t};
+              return fmt::formatter<string, CharT>::format(ss.str(), fc);
+          }
+      };
+
+      template<class T, class CharT>
+      struct formatter<output_vector<T>, CharT>
+        : formatter<string, CharT>
+      {
+          template<class FormatContext>
+          auto format(const output_vector<T>& t, FormatContext& fc) {
+              std::stringstream ss;
+              ss << t;
+              return fmt::formatter<string, CharT>::format(ss.str(), fc);
+          }
+      };
+
+      template<class T, class CharT>
+      struct formatter<output_grid<T>, CharT>
+        : formatter<string, CharT>
+      {
+          template<class FormatContext>
+          auto format(const output_grid<T>& t, FormatContext& fc) {
+              std::stringstream ss;
+              ss << t;
+              return fmt::formatter<string, CharT>::format(ss.str(), fc);
+          }
+      };
+  }
+#else
+  #define TRACE(...)
+#endif
+#pragma endregion
+
+#ifndef LIB_ONLY
 // ==================================================================
 // ==================================================================
 
 int main()
 {
-    return 0;
 }
 
+// ==================================================================
+// ==================================================================
+#endif

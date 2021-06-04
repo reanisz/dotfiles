@@ -1,3 +1,6 @@
 c++
+-g
 -std=c++17
 -I/home/reanisz/src/github.com/atcoder/ac-library/
+-I../../lib/fmt/include
+-DDEBUG
