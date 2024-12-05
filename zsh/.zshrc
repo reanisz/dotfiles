@@ -98,3 +98,7 @@ function reload_functions(){
 
 reload_functions
 source ~/.zshrc.local
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

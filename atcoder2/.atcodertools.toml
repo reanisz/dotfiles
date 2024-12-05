@@ -1,0 +1,4 @@
+[codestyle]
+indent_type='space'
+indent_width=4
+template_file='.atcoder/template.cpp'

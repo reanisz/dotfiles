@@ -146,7 +146,7 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'gregsexton/gitv'
 hook_add = '''
-    nmap <C-G><C-S> :Gstatus<CR>
+    nmap <C-G><C-S> :Git<CR>
     nmap <C-G><C-D> :Gdiff<CR>
     autocmd FileType gitv call s:my_gitv_settings()
     function! GitvGetCurrentHash()
