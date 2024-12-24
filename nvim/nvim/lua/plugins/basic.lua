@@ -6,7 +6,7 @@ return {
                 let g:startify_custom_header = map(split(system('date'), '\n'), '"   ". v:val') + ['','']
                 let g:startify_bookmarks = [
                             \ '~/.config/nvim/',
-                            \ '~/.config/nvim/init.vim',
+                            \ '~/.config/nvim/init.lua',
                             \ '~/.config/nvim/lua/',
                             \ '~/.config/nvim/lua/plugins/',
                             \ ]
